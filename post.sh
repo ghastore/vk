@@ -33,13 +33,13 @@ init() {
 # -------------------------------------------------------------------------------------------------------------------- #
 
 gh_repo() {
-  local repo_api; repo_api=$( github_api "${GH_API}" )
+  local repo_api; repo_api=$( gh_api "${GH_API}" )
   local repo_name; repo_name=$( jq -r '.full_name' <<< "${repo_api}" )
   local repo_url; repo_url=$( jq -r '.html_url' <<< "${repo_api}" )
   local repo_desc; repo_desc=$( jq -r '.description' <<< "${repo_api}" )
   local repo_tags; repo_tags=$( jq -r '.tags_url' <<< "${repo_api}" )
 
-  local tags_api; tags_api=$( github_api "${repo_tags}?per_page=1" )
+  local tags_api; tags_api=$( gh_api "${repo_tags}?per_page=1" )
   local tag_name; tag_name=$( jq -r '.[0].name' <<< "${tags_api}" )
   local tag_zip_url; tag_zip_url=$( jq -r '.[0].zipball_url' <<< "${tags_api}" )
   local tag_tar_url; tag_tar_url=$( jq -r '.[0].tarball_url' <<< "${tags_api}" )
@@ -60,7 +60,7 @@ gh_repo() {
 # -------------------------------------------------------------------------------------------------------------------- #
 
 gh_topics() {
-  local topics_api; topics_api=$( github_api "${GH_API}/topics" )
+  local topics_api; topics_api=$( gh_api "${GH_API}/topics" )
   local names; names=$( ( jq -r '.names | @sh' <<< "${topics_api}" ) | tr -d \' )
 
   for name in ${names}; do
@@ -86,7 +86,7 @@ vk_wall_post() {
   local message; message="$( vk_message )"
 
   ${curl} -s \
-    "${VK_API}/method/wall.post?owner_id=-${VK_OWNER}" \
+    "${VK_API}/method/wall.post?owner_id=${VK_OWNER}" \
     -F "from_group=${VK_GROUP}" \
     -F "message=${message}" \
     -F "copyright=${VK_CR}" \
@@ -101,7 +101,7 @@ vk_wall_post() {
 # -------------------------------------------------------------------------------------------------------------------- #
 
 # GitHub API.
-github_api() {
+gh_api() {
   ${curl} -s \
   -H "Authorization: Bearer ${GH_TOKEN}" \
   -H "Accept: application/vnd.github+json" \
