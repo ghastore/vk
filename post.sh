@@ -5,8 +5,8 @@
 # -------------------------------------------------------------------------------------------------------------------- #
 
 # Vars.
-GITHUB_API="${1}"
-GITHUB_TOKEN="${2}"
+GH_API="${1}"
+GH_TOKEN="${2}"
 VK_API="${3}"
 VK_TOKEN="${4}"
 VK_VER="${5}"
@@ -32,8 +32,8 @@ init() {
 # GITHUB REPOSITORY.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-github_repo() {
-  local repo_api; repo_api=$( github_api "${GITHUB_API}" )
+gh_repo() {
+  local repo_api; repo_api=$( github_api "${GH_API}" )
   local repo_name; repo_name=$( jq -r '.full_name' <<< "${repo_api}" )
   local repo_url; repo_url=$( jq -r '.html_url' <<< "${repo_api}" )
   local repo_desc; repo_desc=$( jq -r '.description' <<< "${repo_api}" )
@@ -59,8 +59,8 @@ github_repo() {
 # GITHUB REPOSITORY TOPICS.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-github_topics() {
-  local topics_api; topics_api=$( github_api "${GITHUB_API}/topics" )
+gh_topics() {
+  local topics_api; topics_api=$( github_api "${GH_API}/topics" )
   local names; names=$( ( jq -r '.names | @sh' <<< "${topics_api}" ) | tr -d \' )
 
   for name in ${names}; do
@@ -72,10 +72,10 @@ github_topics() {
 # VK MESSAGE CONSTRUCTOR.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-vk_wall_message() {
-  github_repo;
+vk_message() {
+  gh_repo
   echo ""
-  github_topics
+  gh_topics
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
@@ -83,7 +83,7 @@ vk_wall_message() {
 # -------------------------------------------------------------------------------------------------------------------- #
 
 vk_wall_post() {
-  local message; message="$( vk_wall_message )"
+  local message; message="$( vk_message )"
 
   ${curl} -s \
     "${VK_API}/method/wall.post?owner_id=-${VK_OWNER}" \
@@ -103,7 +103,7 @@ vk_wall_post() {
 # GitHub API.
 github_api() {
   ${curl} -s \
-  -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+  -H "Authorization: Bearer ${GH_TOKEN}" \
   -H "Accept: application/vnd.github+json" \
   -A "${USER_AGENT}" \
   "${1}"
