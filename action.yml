@@ -1,0 +1,49 @@
+name: "VK: GitHub Tag"
+author: "z17 CX <mail@z17.cx>"
+description: ""
+branding:
+  icon: ""
+  color: ""
+inputs:
+  github_api:
+    description: "GitHub API repository URL."
+    required: true
+    default: "https://api.github.com"
+  github_token:
+    description: ""
+    required: true
+  vk_api:
+    description: "VK API domain URL."
+    required: true
+    default: "https://api.vk.com"
+  vk_token:
+    description: "VK app token."
+    required: true
+  vk_ver:
+    description: "VK API version."
+    required: true
+    default: "5.131"
+  vk_owner:
+    description: "VK owner (page ID)."
+    required: true
+  vk_group:
+    description: "VK publish as group name."
+    default: "1"
+  vk_cr:
+    description: "VK post copyright."
+  vk_ads:
+    description: "VK publish as ads."
+    default: "0"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.github_api }}
+    - ${{ inputs.github_token }}
+    - ${{ inputs.vk_api }}
+    - ${{ inputs.vk_token }}
+    - ${{ inputs.vk_ver }}
+    - ${{ inputs.vk_owner }}
+    - ${{ inputs.vk_group }}
+    - ${{ inputs.vk_cr }}
+    - ${{ inputs.vk_ads }}
