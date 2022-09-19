@@ -40,19 +40,19 @@ gh_repo() {
   local repo_tags; repo_tags=$( jq -r '.tags_url' <<< "${repo_api}" )
 
   local tags_api; tags_api=$( github_api "${repo_tags}?per_page=1" )
-  local tags_name; tags_name=$( jq -r '.[0].name' <<< "${tags_api}" )
-  local tags_zip_url; tags_zip_url=$( jq -r '.[0].zipball_url' <<< "${tags_api}" )
-  local tags_tar_url; tags_tar_url=$( jq -r '.[0].tarball_url' <<< "${tags_api}" )
-  local tags_sha; tags_sha=$( jq -r '.[0].commit.sha' <<< "${tags_api}" )
+  local tag_name; tag_name=$( jq -r '.[0].name' <<< "${tags_api}" )
+  local tag_zip_url; tag_zip_url=$( jq -r '.[0].zipball_url' <<< "${tags_api}" )
+  local tag_tar_url; tag_tar_url=$( jq -r '.[0].tarball_url' <<< "${tags_api}" )
+  local tag_sha; tag_sha=$( jq -r '.[0].commit.sha' <<< "${tags_api}" )
 
   echo "🎉 New tag released! 🎉";
-  [[ "${tags_name}" != "null" ]] && echo "🏷️ Tag: ${tags_name}"
-  [[ "${repo_name}" != "null" ]] && echo "🗄️ Repository: ${repo_name}"
+  [[ "${tag_name}" != "null" ]] && echo "🏷️ Tag: ${tag_name}"
+  [[ "${repo_name}" != "null" ]] && echo "📦 Repository: ${repo_name}"
   [[ "${repo_desc}" != "null" ]] && echo "📜 Description: ${repo_desc}"
   [[ "${repo_url}" != "null" ]] && echo "🌎 Repository URL: ${repo_url}"
-  [[ "${tags_zip_url}" != "null" ]] && echo "💾 Download (ZIP): ${tags_zip_url}"
-  [[ "${tags_tar_url}" != "null" ]] && echo "💾 Download (TAR): ${tags_tar_url}"
-  [[ "${tags_sha}" != "null" ]] && echo "🧬 SHA: ${tags_sha}"
+  [[ "${tag_zip_url}" != "null" ]] && echo "💾 Download (ZIP): ${tag_zip_url}"
+  [[ "${tag_tar_url}" != "null" ]] && echo "💾 Download (TAR): ${tag_tar_url}"
+  [[ "${tag_sha}" != "null" ]] && echo "🧬 SHA: ${tag_sha}"
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
