@@ -46,9 +46,9 @@ gh_repo() {
   local tags_sha; tags_sha=$( jq -r '.[0].commit.sha' <<< "${tags_api}" )
 
   echo "🎉 New tag released! 🎉";
-  [[ "${tags_name}" != "null" ]] && echo "📦 Tag: ${tags_name}"
-  [[ "${repo_name}" != "null" ]] && echo "📦 Repository: ${repo_name}"
-  [[ "${repo_desc}" != "null" ]] && echo "📦 Description: ${repo_desc}"
+  [[ "${tags_name}" != "null" ]] && echo "🏷️ Tag: ${tags_name}"
+  [[ "${repo_name}" != "null" ]] && echo "🗄️ Repository: ${repo_name}"
+  [[ "${repo_desc}" != "null" ]] && echo "📜 Description: ${repo_desc}"
   [[ "${repo_url}" != "null" ]] && echo "🌎 Repository URL: ${repo_url}"
   [[ "${tags_zip_url}" != "null" ]] && echo "💾 Download (ZIP): ${tags_zip_url}"
   [[ "${tags_tar_url}" != "null" ]] && echo "💾 Download (TAR): ${tags_tar_url}"
