@@ -40,7 +40,10 @@ jobs:
   VK API domain URL. Default: `https://api.vk.com`.
 - `vk_token`  
   VK app token. Get: 
-  ```https://oauth.vk.com/authorize?client_id=APP_ID&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=friends&response_type=token&v=5.131```, `APP_ID` - VK app ID.
+```
+https://oauth.vk.com/authorize?client_id=APP_ID&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=friends&response_type=token&v=5.131
+```
+  `APP_ID` - VK app ID.
 - `vk_ver`  
   VK API version. Default: `5.131`.
 - `vk_owner`  
