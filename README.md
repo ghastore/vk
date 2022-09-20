@@ -51,7 +51,7 @@ jobs:
 - `vk_ads`  
   VK publish as ads. Default: `0`.
 
-### VK App Token
+## VK App Token
 
 Get: 
 
