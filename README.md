@@ -53,10 +53,8 @@ jobs:
 
 ## VK App Token
 
-Get: 
-
 ```
 https://oauth.vk.com/authorize?client_id=APP_ID&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=wall,groups,stats,offline&response_type=token&v=5.131
 ```
-https://oauth.vk.com/authorize?client_id=51429667&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=wall,groups,stats,offline&response_type=token&v=5.131
+
 `APP_ID` - VK app ID.
