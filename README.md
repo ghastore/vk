@@ -1,6 +1,6 @@
 # VK Share
 
-Publishing GitHub repository information in VK.
+Share GitHub repository information in VK.
 
 ## Syntax for Tag Sharing
 
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     name: "VK"
     steps:
-      - name: "Sharing GitHub repository tag to VK"
+      - name: "Share GitHub repository tag to VK"
         uses: ghastore/vk@main
         with:
           type: "tag"
@@ -28,8 +28,8 @@ jobs:
           vk_cr: "https://example.com"
 ```
 
-- `type`  
-  Type GitHub API.
+- `mode`  
+  GitHub API mode.
   - `commit`
   - `tag`
 - `gh_api`  

@@ -1,7 +1,7 @@
 FROM alpine
 
-LABEL "name"="VK: GitHub Tag"
-LABEL "description"="Publishing GitHub repository tag in VK."
+LABEL "name"="VK Share"
+LABEL "description"="Share GitHub repository in VK."
 LABEL "maintainer"="z17 CX <mail@z17.cx>"
 LABEL "repository"="https://github.com/ghastore/vk.git"
 LABEL "homepage"="https://github.com/ghastore"
