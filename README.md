@@ -28,13 +28,13 @@ jobs:
           vk_cr: "https://example.com"
 ```
 
-- **mode**  
+- `mode`  
   GitHub API mode.
   - `commit`
   - `tag`
-- **gh_api**  
+- `gh_api`  
   GitHub API repository URL. Default: `https://api.github.com`.
-- **gh_token**  
+- `gh_token`  
   VK API domain URL.
 - `vk_api`  
   VK API domain URL. Default: `https://api.vk.com`.
