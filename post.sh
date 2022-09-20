@@ -5,15 +5,16 @@
 # -------------------------------------------------------------------------------------------------------------------- #
 
 # Vars.
-GH_API="${1}"
-GH_TOKEN="${2}"
-VK_API="${3}"
-VK_TOKEN="${4}"
-VK_VER="${5}"
-VK_OWNER="${6}"
-VK_GROUP="${7}"
-VK_CR="${8}"
-VK_ADS="${9}"
+TYPE="${1}"
+GH_API="${2}"
+GH_TOKEN="${3}"
+VK_API="${4}"
+VK_TOKEN="${5}"
+VK_VER="${6}"
+VK_OWNER="${7}"
+VK_GROUP="${8}"
+VK_CR="${9}"
+VK_ADS="${10}"
 USER_AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
 
 # Apps.
@@ -30,10 +31,10 @@ init() {
 }
 
 # -------------------------------------------------------------------------------------------------------------------- #
-# GITHUB REPOSITORY.
+# GITHUB REPOSITORY TAGS.
 # -------------------------------------------------------------------------------------------------------------------- #
 
-gh_repo() {
+gh_tags() {
   local repo_api; repo_api=$( gh_api "${GH_API}" )
   local repo_name; repo_name=$( jq -r '.full_name' <<< "${repo_api}" )
   local repo_url; repo_url=$( jq -r '.html_url' <<< "${repo_api}" )
@@ -65,7 +66,7 @@ gh_topics() {
   local names; names=$( ( jq -r '.names | @sh' <<< "${topics_api}" ) | tr -d \' )
 
   for name in ${names}; do
-    echo -n "#${name} "
+    echo -n "#${name} " | sed 's/-/_/'
   done
 }
 
@@ -74,7 +75,7 @@ gh_topics() {
 # -------------------------------------------------------------------------------------------------------------------- #
 
 vk_message() {
-  gh_repo
+  [[ "${TYPE}" == "tag" ]] && gh_tags
   echo ""
   gh_topics
 }

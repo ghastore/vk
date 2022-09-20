@@ -5,6 +5,10 @@ branding:
   icon: ""
   color: ""
 inputs:
+  type:
+    description: ""
+    required: true
+    default: "tag"
   gh_api:
     description: "GitHub API repository URL."
     required: true
@@ -38,6 +42,7 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
+    - ${{ inputs.type }}
     - ${{ inputs.gh_api }}
     - ${{ inputs.gh_token }}
     - ${{ inputs.vk_api }}
