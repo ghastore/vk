@@ -15,23 +15,25 @@ on:
 jobs:
   post:
     runs-on: ubuntu-latest
-    name: "VK"
+    name: "Share"
     steps:
       - name: "Share GitHub repository tag to VK"
         uses: ghastore/vk@main
         with:
           type: "tag"
           gh_api: "https://api.github.com/repos/${{ github.repository }}"
-          gh_token: "GITHUB_TOKEN"
-          vk_token: "VK_TOKEN"
-          vk_owner: "-000000"
+          gh_token: "${{ secrets.GH_TOKEN }}"
+          vk_token: "${{ secrets.VK_TOKEN }}"
+          vk_owner: "-000000000"
           vk_cr: "https://example.com"
 ```
 
-- `mode`  
-  GitHub API mode.
+#### `mode`
+
+GitHub API mode.
   - `commit`
   - `tag`
+
 - `gh_api`  
   GitHub API repository URL. Default: `https://api.github.com`.
 - `gh_token`  
